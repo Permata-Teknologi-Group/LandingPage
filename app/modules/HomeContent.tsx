@@ -4,6 +4,7 @@ import Image from "next/image";
 import Navbar from "./navbar";
 import IntensiForm from "./IntensiForm";
 import { useAppContext } from "../context/AppContext";
+import { useEffect, useState } from "react";
 
 const translations = {
   id: {
@@ -17,6 +18,7 @@ const translations = {
     qris: "QRIS",
     liturgy: "Liturgi",
     source: "sumber",
+    galleryTitle: "Galeri",
     pricing: "Harga",
     basic: "Dasar",
     pro: "Pro",
@@ -47,6 +49,7 @@ const translations = {
     qris: "QRIS",
     liturgy: "Liturgy",
     source: "source",
+    galleryTitle: "Gallery",
     pricing: "Pricing",
     basic: "Basic",
     pro: "Pro",
@@ -77,6 +80,7 @@ const translations = {
     qris: "二维码支付",
     liturgy: "礼拜",
     source: "来源",
+    galleryTitle: "图库",
     pricing: "价格",
     basic: "基础",
     pro: "专业",
@@ -101,6 +105,23 @@ const translations = {
 export default function HomeContent() {
   const { theme, language } = useAppContext();
   const t = translations[language];
+  const [typedQuote, setTypedQuote] = useState("");
+
+  useEffect(() => {
+    let currentIndex = 0;
+    setTypedQuote("");
+
+    const timer = setInterval(() => {
+      currentIndex += 1;
+      setTypedQuote(t.heroQuote.slice(0, currentIndex));
+      if (currentIndex >= t.heroQuote.length) {
+        clearInterval(timer);
+      }
+    }, 80);
+
+    return () => clearInterval(timer);
+  }, [t.heroQuote]);
+
   const endSectionClass = theme === "dark"
     ? "py-20 bg-gradient-to-br from-violet-950 via-slate-950 to-fuchsia-950 text-slate-100"
     : "py-20 bg-blue-950 text-white";
@@ -125,12 +146,15 @@ export default function HomeContent() {
       </div>
       <Navbar />
       <main className="relative min-h-full flex flex-col bg-transparent text-black">
-        <div className="relative min-h-screen flex-1 flex items-center justify-center z-10 overflow-hidden">
-          <div className="relative w-full text-left px-4 py-24">
-            <h1 className="text-4xl max-w-2xl font-bold mb-4 ml-10 text-white">
-              {t.heroQuote}
-            </h1>
-            <p className="text-lg ml-10 text-white font-medium">{t.scripture}</p>
+        <div id="beranda" className="relative min-h-screen flex-1 flex items-center justify-center z-10 overflow-hidden">
+          <div className="relative w-full text-center sm:text-left px-4 py-24 flex flex-col items-center justify-center">
+            <div className="mx-auto max-w-3xl sm:mx-0">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
+                {typedQuote}
+                <span className="inline-block h-8 w-1 bg-white align-middle ml-2 animate-pulse" />
+              </h1>
+              <p className="text-lg text-white font-medium">{t.scripture}</p>
+            </div>
           </div>
         </div>
       </main>
@@ -140,70 +164,115 @@ export default function HomeContent() {
             <span className="absolute left-6 top-0 -translate-y-1/2 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md border border-blue-100">
               {t.schedule}
             </span>
-            <div className="text-center flex flex-row space-x-4 items-center justify-center">
-              <div className="mb-4 bg-pink-500/50 text-white p-4 rounded-lg">
+            <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="bg-pink-500/50 text-white p-4 rounded-lg">
                 <h1 className="text-xl font-bold">Sabtu</h1>
-                <p className="text-lg min-w-[120px]">17.30 WIB</p>
+                <p className="text-lg">17.30 WIB</p>
+              </div>
+              <div className="bg-blue-500/50 text-white p-4 rounded-lg">
+                <h1 className="text-xl font-bold">Minggu</h1>
+                <p className="text-lg">06.30 WIB</p>
+              </div>
+              <div className="bg-blue-500/50 text-white p-4 rounded-lg">
+                <h1 className="text-xl font-bold">Minggu</h1>
+                <p className="text-lg">08.00 WIB</p>
+              </div>
+              <div className="bg-blue-500/50 text-white p-4 rounded-lg">
+                <h1 className="text-xl font-bold">Minggu</h1>
+                <p className="text-lg">10.00 WIB</p>
+              </div>
+              <div className="bg-blue-500/50 text-white p-4 rounded-lg">
+                <h1 className="text-xl font-bold">Minggu</h1>
+                <p className="text-lg">15.00 WIB</p>
+              </div>
+              <div className="bg-blue-500/50 text-white p-4 rounded-lg">
+                <h1 className="text-xl font-bold">Minggu</h1>
+                <p className="text-lg">17.00 WIB</p>
+              </div>
+              <div className="bg-green-500/50 text-white p-4 rounded-lg">
+                <h1 className="text-xl font-bold">Harian</h1>
+                <p className="text-lg">06.00 WIB</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="container mx-auto px-4 text-center items-start justify-start flex flex-row mt-10">
-          <div className="w-80/100 flex flex-col items-center justify-center pr-5">
-            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6 mb-6">
+        <div className="container mx-auto px-4 mt-10 grid gap-6 lg:grid-cols-[2fr_1fr]">
+          <div className="space-y-6">
+            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6">
               <span className="absolute left-6 top-0 -translate-y-1/2 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md border border-blue-100">
                 {t.announcement}
               </span>
-              <div className="text-center flex flex-row space-x-4 items-center justify-center">
-                <p className="text-lg min-w-[120px]">17.30 WIB</p>
+              <div className="text-center py-4">
+                <p className="text-lg">17.30 WIB</p>
               </div>
             </div>
-            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6 mb-6">
+            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6">
               <span className="absolute left-6 top-0 -translate-y-1/2 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md border border-blue-100">
                 {t.churchArticle}
               </span>
-              <div className="text-center flex flex-row space-x-4 items-center justify-center">
-                <p className="text-lg min-w-[120px]">17.30 WIB</p>
+              <div className="text-center py-4">
+                <p className="text-lg">17.30 WIB</p>
               </div>
             </div>
           </div>
-          <div className="w-20/100 flex flex-col items-center justify-center pl-5">
-            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6 mb-6">
+          <div className="space-y-6">
+            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6">
               <span className="absolute left-6 top-0 -translate-y-1/2 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md border border-blue-100">
                 {t.liturgyStaff}
               </span>
-              <div className="text-center flex flex-row space-x-4 items-center justify-center">
-                <div className="mb-4 bg-pink-500/50 text-white p-4 rounded-lg">
-                  <h1 className="text-xl font-bold">Sabtu</h1>
-                  <p className="text-lg min-w-[120px]">17.30 WIB</p>
+              <div className="py-4">
+                <div className="mb-4 w-full text-sm text-left font-bold bg-orange-300/50 text-white p-4 rounded-lg">
+                  <h1>Hari: Sabtu</h1>
+                  <h1>Tanggal: XX/XX/XXXX</h1>
+                  <h1>Sesi: I</h1>
+                  <h1>Waktu: XX.XX WIB</h1>
+                  <h1>Lektor: L1</h1>
+                  <h1>Kolektan: K1</h1>
+                  <h1>Mazmur: M1</h1>
+                  <h1>Orangins: O1</h1>
+                  <h1>Dirigen: D1</h1>
+                  <h1>Dekor: D1</h1>
                 </div>
               </div>
             </div>
-            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6 mb-6">
+            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6">
               <span className="absolute left-6 top-0 -translate-y-1/2 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md border border-blue-100">
                 {t.massIntention}
               </span>
               <IntensiForm />
             </div>
-            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6 mb-6">
+            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6">
               <span className="absolute left-6 top-0 -translate-y-1/2 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md border border-blue-100">
                 {t.qris}
               </span>
-              <img src="/qris_kat.jpeg" alt="QRIS" className="min-w-full min-h-auto" />
+              <img src="/qris_kat.jpeg" alt="QRIS" className="w-full h-auto object-contain" />
             </div>
-            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6 mb-6">
+            <div className="min-w-full min-h-[164px] relative border-2 border-blue-500 border-dotted border-blue-300 rounded-lg pt-8 px-6 pb-6">
               <span className="absolute left-6 top-0 -translate-y-1/2 bg-white text-blue-600 font-semibold text-sm px-3 py-1 rounded-full shadow-md border border-blue-100">
                 {t.liturgy}
               </span>
-              <div className="text-center flex flex-row space-x-4 items-center justify-center">
+              <div className="text-center py-4">
                 <div className="mb-4 bg-yellow-100/50 text-white p-10 rounded-lg flex flex-col items-center justify-center">
-                  <img src="https://www.imankatolik.or.id/kal_tgl_img.php" alt="" />
-                  <img src="https://www.imankatolik.or.id/kal_perayaan_img.php" alt="" />
-                  <img src="https://www.imankatolik.or.id/kal_alkitab_img.php" alt="" />
-                  <img src="https://www.imankatolik.or.id/kal_warna_img.php" alt="" />
+                  <img src="https://www.imankatolik.or.id/kal_tgl_img.php" alt="" className="w-full h-auto object-contain" />
+                  <img src="https://www.imankatolik.or.id/kal_perayaan_img.php" alt="" className="w-full h-auto object-contain mt-4" />
+                  <img src="https://www.imankatolik.or.id/kal_alkitab_img.php" alt="" className="w-full h-auto object-contain mt-4" />
+                  <img src="https://www.imankatolik.or.id/kal_warna_img.php" alt="" className="w-full h-auto object-contain mt-4" />
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section id="gallery" className="py-16 bg-slate-950 text-white">
+        <div className="container mx-auto px-4">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl font-bold">{t.galleryTitle}</h2>
+            <p className="mt-2 text-slate-300">Lihat koleksi foto kegiatan dan suasana gereja kami.</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <img src="/kmimg1.jpeg" alt="Gallery 1" className="h-60 w-full rounded-2xl object-cover" />
+            <img src="/qris_kat.jpeg" alt="Gallery 2" className="h-60 w-full rounded-2xl object-cover" />
+            <img src="/kmimg1.jpeg" alt="Gallery 3" className="h-60 w-full rounded-2xl object-cover" />
           </div>
         </div>
       </section>
