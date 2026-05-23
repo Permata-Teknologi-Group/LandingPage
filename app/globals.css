@@ -8,13 +8,13 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-noto-sans-sc, var(--font-geist-sans));
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #ededed;
+    --background: #ffffff;
     --foreground: #0a0a0a;
   }
 }
@@ -22,5 +22,51 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
+
+/* Dark Mode Styles */
+
+html.dark {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+html.dark :root {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+}
+
+html.dark .IMG {
+  background-color: #111827;
+  color: #f8fafc;
+}
+
+html.dark body {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+html.dark section {
+  background-color: #111827;
+  color: #f8fafc;
+}
+
+html.dark div {
+  color: #f8fafc;
+}
+
+html.dark textarea,
+html.dark input {
+  background-color: #1f2937;
+  color: #f8fafc;
+  border-color: #374151;
+}
+
+html.dark textarea:focus,
+html.dark input:focus {
+  background-color: #1f2937;
+  color: #f8fafc;
+  border-color: #60a5fa;
+}
+
