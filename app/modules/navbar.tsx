@@ -51,7 +51,7 @@ export default function Navbar() {
       Announcements: "Pengumuman",
       Events: "Acara",
       Gallery: "Galeri",
-      Login: "Masuk",
+      Login: "MASUK",
     },
     en: {
       Home: "Home",
@@ -72,7 +72,7 @@ export default function Navbar() {
       Announcements: "Announcements",
       Events: "Events",
       Gallery: "Gallery",
-      Login: "Login",
+      Login: "LOGIN",
     },
     zh: {
       Home: "首页",
@@ -128,7 +128,6 @@ export default function Navbar() {
       subitems: ["Articles", "Announcements", "Events"],
     },
     { id: "gallery", key: "Gallery", href: "#gallery" },
-    { id: "login", key: "Login", href: "#login" },
   ];
 
   return (
@@ -227,16 +226,30 @@ export default function Navbar() {
               ))}
             </ul>
 
+            <a
+              href="#login"
+              className="inline-flex items-center gap-2 rounded-full border border-current bg-current/10 px-4 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
+            >
+              <img
+                src="/enter.png"
+                alt="Login"
+                className="h-4 w-4"
+              />
+              {t.Login}
+            </a>
+
             <div className="relative">
               <button
                 onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                className="px-3 py-1 rounded-md border border-current hover:opacity-70 transition duration-300 text-sm"
+                className="inline-flex items-center gap-2 rounded-full border border-current/20 bg-current/10 px-3 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
               >
+                <span aria-hidden="true">🌐</span>
                 {language.toUpperCase()}
+                <span className="text-xs">▾</span>
               </button>
               {showLanguageMenu && (
                 <div
-                  className={`absolute right-0 mt-2 w-32 rounded-md shadow-lg ${
+                  className={`absolute right-0 mt-2 w-36 rounded-xl border border-current/10 bg-white/95 shadow-lg backdrop-blur-sm ${
                     theme === "dark"
                       ? "bg-gray-800 text-white"
                       : "bg-white text-black"
@@ -249,8 +262,10 @@ export default function Navbar() {
                         setLanguage(lang.code as "id" | "en" | "zh");
                         setShowLanguageMenu(false);
                       }}
-                      className={`block w-full text-left px-4 py-2 text-sm hover:opacity-70 ${
-                        language === lang.code ? "font-semibold" : ""
+                      className={`block w-full text-left px-4 py-2 text-sm transition ${
+                        language === lang.code
+                          ? "font-semibold text-current"
+                          : "hover:bg-current/10"
                       }`}
                     >
                       {lang.label}
@@ -262,10 +277,13 @@ export default function Navbar() {
 
             <button
               onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="px-3 py-1 rounded-md border border-current hover:opacity-70 transition duration-300 text-lg"
+              className="inline-flex items-center gap-2 rounded-full border border-current/20 bg-current/10 px-3 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
               title={theme === "light" ? "Dark Mode" : "Light Mode"}
             >
-              {theme === "light" ? "🌙" : "☀️"}
+              <span>{theme === "light" ? "🌙" : "☀️"}</span>
+              <span className="hidden sm:inline">
+                {theme === "light" ? "Dark" : "Light"}
+              </span>
             </button>
           </div>
         </div>
@@ -329,16 +347,30 @@ export default function Navbar() {
             <div className="flex flex-col gap-2 pt-2">
               <button
                 onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                className="w-full rounded-md border border-current px-3 py-2 text-sm hover:bg-slate-100/70 transition"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-current/20 bg-current/10 px-3 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
               >
+                <span aria-hidden="true">🌐</span>
                 {language.toUpperCase()}
               </button>
               <button
                 onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                className="w-full rounded-md border border-current px-3 py-2 text-sm hover:bg-slate-100/70 transition"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-current/20 bg-current/10 px-3 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
               >
-                {theme === "light" ? "Dark Mode" : "Light Mode"}
+                <span>{theme === "light" ? "🌙" : "☀️"}</span>
+                {theme === "light" ? "Dark" : "Light"}
               </button>
+              <a
+                href="#login"
+                onClick={hideMobileMenu}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-current bg-current/10 px-3 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
+              >
+                <img
+                  src="/enter.png"
+                  alt="Login"
+                  className="h-4 w-4"
+                />
+                {t.Login}
+              </a>
             </div>
 
             {showLanguageMenu && (
