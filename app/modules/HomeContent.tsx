@@ -263,19 +263,6 @@ export default function HomeContent() {
           </div>
         </div>
       </section>
-      <section id="gallery" className="py-16 bg-slate-950 text-white">
-        <div className="container mx-auto px-4">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-bold">{t.galleryTitle}</h2>
-            <p className="mt-2 text-slate-300">Lihat koleksi foto kegiatan dan suasana gereja kami.</p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <img src="/kmimg1.jpeg" alt="Gallery 1" className="h-60 w-full rounded-2xl object-cover" />
-            <img src="/qris_kat.jpeg" alt="Gallery 2" className="h-60 w-full rounded-2xl object-cover" />
-            <img src="/kmimg1.jpeg" alt="Gallery 3" className="h-60 w-full rounded-2xl object-cover" />
-          </div>
-        </div>
-      </section>
       <section className={endSectionClass}>
         <div className="container mx-auto px-4">
           <div className="grid gap-8 lg:grid-cols-2 items-center">
