@@ -147,13 +147,8 @@ export default function Navbar() {
           <img
             src="/logosanmar.png"
             alt="Logo"
-            className="max-w-[52px] max-h-[52px]"
+            className="max-w-[60px] max-h-[60px]"
           />
-          <div className="hidden md:block">
-            <p className="text-sm">Paroki Santa Maria Yang Dikandung Tanpa Noda</p>
-            <h1 className="font-bold text-sm">GEREJA KATEDRAL MEDAN</h1>
-            <h1 className="font-bold text-sm">KEUSKUPAN AGUNG MEDAN</h1>
-          </div>
         </div>
 
         <div className="flex items-center gap-3">
@@ -228,10 +223,10 @@ export default function Navbar() {
 
             <a
               href="#login"
-              className="inline-flex items-center gap-2 rounded-full border border-current bg-current/10 px-4 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
+              className="inline-flex items-center gap-2 rounded-full border border-current/20 bg-current/10 px-4 py-2 text-sm font-semibold text-current"
             >
               <img
-                src="/enter.png"
+                src={isScrolled ? "/enter (1).png" : "/enter.png"}
                 alt="Login"
                 className="h-4 w-4"
               />
@@ -365,7 +360,7 @@ export default function Navbar() {
                 className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-current bg-current/10 px-3 py-2 text-sm font-semibold text-current transition duration-300 hover:bg-current/20"
               >
                 <img
-                  src="/enter.png"
+                  src={isScrolled ? "/enter (1).png" : "/enter.png"}
                   alt="Login"
                   className="h-4 w-4"
                 />
